@@ -14,7 +14,7 @@ The full API reference of eth node can be found [here](https://ethereum.org/en/d
 
 The whole Grafana stack components are in the `docker-compose.yaml` file.
 
-To start the whole stack, you can simply run `docker compose up --force-recreate`
+To start the whole stack, you can simply run `docker-compose up --force-recreate`
  
 
 # PART 1: Creating a Probe to collect last block from an ETH node
