@@ -8,7 +8,7 @@ The test has 2 parts which do not depend on each other. If you have trouble with
 
 # Test Scenario
 
-As part of your SRE job, you have to monitor an online blockchain ethereum node.
+As part of your job, you have to monitor an online blockchain ethereum node.
 
 The full API reference of eth node can be found [here](https://ethereum.org/en/developers/docs/apis/json-rpc/#json-rpc-methods).
 
