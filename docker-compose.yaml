@@ -37,6 +37,20 @@ services:
     depends_on:
       - tempo
 
+  # k6:
+  #   image: grafana/k6
+  #   volumes:
+  #     - ./part_two:/scripts
+  #   command: run /scripts/k6.js --out json=output.json
+
+  # otel-collector:
+  #   image: otel/opentelemetry-collector
+  #   ports:
+  #     - "4317:4317" # gRPC endpoint for OTLP
+  #   volumes:
+  #     - ./collector-config.yaml:/etc/otelcol/config.yaml
+  #   command: ["--config", "/etc/otelcol/config.yaml"]
+
   grafana:
     image: grafana/grafana:10.2.2
     volumes:
