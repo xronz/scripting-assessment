@@ -1,2 +1,4 @@
 */**/*.result.ts
 */**/node_modules
+./your-probe/index.js
+./your-probe/build/*

@@ -1,1 +1,1 @@
-Firstly i didn't expect that questions to creating custom probe exporter, as this is my first time doing. I didn't manage to finish it but is a good experience but believe i con solve this questions given more times.
+I didn't expect that questions to creating custom probe exporter, as this is my first time attempt, it took me more time than I expected, but is a good experience. I believe with given more time I can make it better.

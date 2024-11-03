@@ -1,0 +1,382 @@
+{
+    "annotations": {
+      "list": [
+        {
+          "builtIn": 1,
+          "datasource": {
+            "type": "grafana",
+            "uid": "-- Grafana --"
+          },
+          "enable": true,
+          "hide": true,
+          "iconColor": "rgba(0, 211, 255, 1)",
+          "name": "Annotations & Alerts",
+          "type": "dashboard"
+        }
+      ]
+    },
+    "editable": true,
+    "fiscalYearStartMonth": 0,
+    "graphTooltip": 0,
+    "links": [],
+    "liveNow": false,
+    "panels": [
+      {
+        "datasource": {
+          "type": "tempo",
+          "uid": "tempo"
+        },
+        "fieldConfig": {
+          "defaults": {
+            "color": {
+              "mode": "thresholds"
+            },
+            "mappings": [],
+            "thresholds": {
+              "mode": "absolute",
+              "steps": [
+                {
+                  "color": "green",
+                  "value": null
+                },
+                {
+                  "color": "red",
+                  "value": 1000
+                }
+              ]
+            }
+          },
+          "overrides": []
+        },
+        "gridPos": {
+          "h": 8,
+          "w": 13,
+          "x": 0,
+          "y": 0
+        },
+        "id": 3,
+        "options": {
+          "minVizHeight": 75,
+          "minVizWidth": 75,
+          "orientation": "auto",
+          "reduceOptions": {
+            "calcs": [
+              "lastNotNull"
+            ],
+            "fields": "",
+            "values": false
+          },
+          "showThresholdLabels": false,
+          "showThresholdMarkers": true
+        },
+        "pluginVersion": "10.2.2",
+        "targets": [
+          {
+            "datasource": {
+              "type": "tempo",
+              "uid": "tempo"
+            },
+            "filters": [
+              {
+                "id": "1e0bf048",
+                "operator": "=",
+                "scope": "span",
+                "tag": "http.method",
+                "value": [
+                  "PUT"
+                ],
+                "valueType": "string"
+              },
+              {
+                "id": "service-name",
+                "operator": "=",
+                "scope": "resource",
+                "tag": "service.name",
+                "value": [
+                  "shop-backend"
+                ],
+                "valueType": "string"
+              },
+              {
+                "id": "span-name",
+                "operator": "=",
+                "scope": "span",
+                "tag": "name",
+                "value": [
+                  "article-to-cart"
+                ],
+                "valueType": "string"
+              }
+            ],
+            "groupBy": [
+              {
+                "id": "514b7074",
+                "scope": "span"
+              }
+            ],
+            "limit": 20,
+            "query": "{span.http.method=\"PUT\" && resource.service.name=\"shop-backend\" && name=\"article-to-cart\"}",
+            "queryType": "traceqlSearch",
+            "refId": "A",
+            "tableType": "traces"
+          }
+        ],
+        "title": "Avg Latency PUT Request (10min)",
+        "type": "gauge"
+      },
+      {
+        "datasource": {
+          "type": "tempo",
+          "uid": "tempo"
+        },
+        "fieldConfig": {
+          "defaults": {
+            "color": {
+              "mode": "palette-classic"
+            },
+            "custom": {
+              "axisBorderShow": false,
+              "axisCenteredZero": false,
+              "axisColorMode": "text",
+              "axisLabel": "",
+              "axisPlacement": "auto",
+              "barAlignment": 0,
+              "drawStyle": "line",
+              "fillOpacity": 0,
+              "gradientMode": "none",
+              "hideFrom": {
+                "legend": false,
+                "tooltip": false,
+                "viz": false
+              },
+              "insertNulls": false,
+              "lineInterpolation": "linear",
+              "lineWidth": 1,
+              "pointSize": 5,
+              "scaleDistribution": {
+                "type": "linear"
+              },
+              "showPoints": "auto",
+              "spanNulls": false,
+              "stacking": {
+                "group": "A",
+                "mode": "none"
+              },
+              "thresholdsStyle": {
+                "mode": "off"
+              }
+            },
+            "mappings": [],
+            "thresholds": {
+              "mode": "absolute",
+              "steps": [
+                {
+                  "color": "green",
+                  "value": null
+                },
+                {
+                  "color": "red",
+                  "value": 80
+                }
+              ]
+            }
+          },
+          "overrides": []
+        },
+        "gridPos": {
+          "h": 8,
+          "w": 13,
+          "x": 0,
+          "y": 8
+        },
+        "id": 2,
+        "options": {
+          "legend": {
+            "calcs": [],
+            "displayMode": "list",
+            "placement": "bottom",
+            "showLegend": true
+          },
+          "tooltip": {
+            "mode": "single",
+            "sort": "none"
+          }
+        },
+        "targets": [
+          {
+            "datasource": {
+              "type": "tempo",
+              "uid": "tempo"
+            },
+            "filters": [
+              {
+                "id": "4be881bd",
+                "operator": "=",
+                "scope": "span",
+                "tag": "http.method",
+                "value": [
+                  "POST"
+                ],
+                "valueType": "string"
+              },
+              {
+                "id": "service-name",
+                "operator": "=",
+                "scope": "resource",
+                "tag": "service.name",
+                "value": [
+                  "shop-backend"
+                ],
+                "valueType": "string"
+              },
+              {
+                "id": "span-name",
+                "operator": "=",
+                "scope": "span",
+                "tag": "name",
+                "value": [
+                  "article-to-cart"
+                ],
+                "valueType": "string"
+              }
+            ],
+            "groupBy": [
+              {
+                "id": "b29c82d8",
+                "scope": "span"
+              }
+            ],
+            "limit": 20,
+            "queryType": "traceqlSearch",
+            "refId": "A",
+            "tableType": "traces"
+          }
+        ],
+        "title": "Rate of PUT Request (10 min)",
+        "type": "timeseries"
+      },
+      {
+        "datasource": {
+          "type": "tempo",
+          "uid": "tempo"
+        },
+        "description": "",
+        "fieldConfig": {
+          "defaults": {
+            "custom": {
+              "align": "center",
+              "cellOptions": {
+                "type": "auto"
+              },
+              "inspect": false
+            },
+            "mappings": [],
+            "thresholds": {
+              "mode": "absolute",
+              "steps": [
+                {
+                  "color": "green",
+                  "value": null
+                },
+                {
+                  "color": "red",
+                  "value": 80
+                }
+              ]
+            }
+          },
+          "overrides": []
+        },
+        "gridPos": {
+          "h": 8,
+          "w": 13,
+          "x": 0,
+          "y": 16
+        },
+        "id": 1,
+        "options": {
+          "cellHeight": "sm",
+          "footer": {
+            "countRows": false,
+            "fields": "",
+            "reducer": [
+              "sum"
+            ],
+            "show": false
+          },
+          "showHeader": true
+        },
+        "pluginVersion": "10.2.2",
+        "targets": [
+          {
+            "datasource": {
+              "type": "tempo",
+              "uid": "tempo"
+            },
+            "filters": [
+              {
+                "id": "e7dbb260",
+                "operator": "=",
+                "scope": "span",
+                "tag": "http.method",
+                "value": [
+                  "PUT"
+                ],
+                "valueType": "string"
+              },
+              {
+                "id": "span-name",
+                "operator": "=",
+                "scope": "span",
+                "tag": "name",
+                "value": [
+                  "article-to-cart"
+                ],
+                "valueType": "string"
+              },
+              {
+                "id": "service-name",
+                "operator": "=",
+                "scope": "resource",
+                "tag": "service.name",
+                "value": [
+                  "shop-backend"
+                ],
+                "valueType": "string"
+              }
+            ],
+            "groupBy": [
+              {
+                "id": "f4614072",
+                "scope": "span"
+              }
+            ],
+            "key": "Q-8ffcbca2-b568-45ac-8e6c-ff05481f5ee9-0",
+            "limit": 20,
+            "query": "trace\n  | filter span.name == \"article to cart\"",
+            "queryType": "traceqlSearch",
+            "refId": "A",
+            "tableType": "traces"
+          }
+        ],
+        "title": "PUT Request Trace",
+        "type": "table"
+      }
+    ],
+    "refresh": "",
+    "schemaVersion": 38,
+    "tags": [],
+    "templating": {
+      "list": []
+    },
+    "time": {
+      "from": "now-10m",
+      "to": "now"
+    },
+    "timepicker": {},
+    "timezone": "",
+    "title": "/article-to-cart dashboard",
+    "uid": "f48a91fd-6204-4470-b065-e76b70dbfc4d",
+    "version": 1,
+    "weekStart": ""
+  }

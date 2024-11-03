@@ -37,24 +37,11 @@ services:
     depends_on:
       - tempo
 
-  # k6:
-  #   image: grafana/k6
-  #   volumes:
-  #     - ./part_two:/scripts
-  #   command: run /scripts/k6.js --out json=output.json
-
-  # otel-collector:
-  #   image: otel/opentelemetry-collector
-  #   ports:
-  #     - "4317:4317" # gRPC endpoint for OTLP
-  #   volumes:
-  #     - ./collector-config.yaml:/etc/otelcol/config.yaml
-  #   command: ["--config", "/etc/otelcol/config.yaml"]
-
   grafana:
     image: grafana/grafana:10.2.2
     volumes:
       - ./grafana-datasources.yaml:/etc/grafana/provisioning/datasources/datasources.yaml
+      - ./grafana/dashboards:/etc/grafana/provisioning/dashboards/ # auto provision dashboard
     environment:
       - GF_AUTH_ANONYMOUS_ENABLED=true
       - GF_AUTH_ANONYMOUS_ORG_ROLE=Admin
@@ -62,3 +49,15 @@ services:
       - GF_FEATURE_TOGGLES_ENABLE=traceqlEditor traceQLStreaming metricsSummary
     ports:
       - "3001:3000"
+  
+  probe:
+    image: xronz/your-probe:v1
+    build:
+        context: ./your-probe
+        dockerfile: Dockerfile
+    restart: always
+    ports:
+        - "5338:5338"
+    environment:
+      - PROBE_FREQ=5000
+      - EXPORTER_ENDPOINT="http://tempo:4318/v1/metrics"
